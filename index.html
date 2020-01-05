@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <script> 
+            function computerPlay() {
+                const selections = ['rock', 'paper', 'scissors'];
+                const selction = Math.round(Math.random() * 3);
+                return selections[selction];
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+
+                switch(playerSelection) {
+                    case 'rock':
+                        switch(computerSelection) {
+                            case 'scissors':
+                                return 1;
+                            case 'paper':
+                                return -1;
+                            case 'rock':
+                                return 0;
+                        }
+                        break;
+                    case 'paper':
+                        switch(computerSelection) {
+                            case 'scissors':
+                                return -1;
+                            case 'paper':
+                                return 0;
+                            case 'rock':
+                                return 1;
+                        }
+                        break;
+                    case 'scissors':
+                        switch(computerSelection) {
+                            case 'scissors':
+                                return 0;
+                            case 'paper':
+                                return 1;
+                            case 'rock':
+                                return -1;
+                        }
+                        break;
+                }
+            }
+
+            function game() {
+                let playerScore = 0,
+                    computerScore = 0;
+
+                for(let i = 0; i < 5; i++) {
+                    const playerSelection = prompt('Your selection:');
+                    const computerSelection = computerPlay();
+                    const winner = playRound(playerSelection, computerSelection);
+                    
+                    if(winner > 0)
+                        playerScore++;
+                    else if (winner < 0)
+                        computerScore++
+                }
+
+                if(playerScore > computerScore)
+                    console.log(`You win! Score: ${playerScore} : ${computerScore}`);
+                else if(computerScore > playerScore)
+                    console.log(`You lose! Score: ${computerScore} : ${playerScore}`);
+                else
+                    console.log(`The match is drawn! Score: ${playerScore} : ${playerScore}`);
+            }
+
+            game();
+        </script>
+    </body>
+</html>
